@@ -159,7 +159,7 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('./api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -169,7 +169,17 @@ export default function App() {
         }),
       });
 
-      const data = await response.json();
+      if (response.status === 404) {
+        throw new Error(
+          '找不到後端對話服務（404）。GitHub Pages 僅支援靜態網頁，若要啟用書靈 AI 對話，請透過 Node.js 伺服器（npm start）或 AI Studio 分享連結執行。'
+        );
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      const data = contentType.includes('application/json')
+        ? await response.json()
+        : { error: `伺服器回應異常（HTTP ${response.status}）。` };
+
       if (!response.ok) {
         throw new Error(data.error || '書靈暫時無法回應，請稍後再試。');
       }
