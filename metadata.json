@@ -1,0 +1,6 @@
+{
+  "name": "萬經閣 — 守護書靈交互典藏館",
+  "description": "《神域與萬界樹》世界觀互動典籍館：與貪財話癆的萬經閣守護書靈對話，用樹葉子解鎖上古祕辛與絕密神明畫像，小心別吵到朝曉大人。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
